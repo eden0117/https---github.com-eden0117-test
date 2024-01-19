@@ -1,22 +1,18 @@
-import time 
-import tkinter as tk
-from tkinter import simpledialog
-import pyautogui
+import time,sys 
+import pyperclip
+import keyboard
 USER_INP = ""
-def on_key_press(USER_INP):
-    print(USER_INP)
-    pyautogui.typewrite(USER_INP,interval=0.005)
-    exit()
-if __name__ == "__main__":
-    
-    ROOT = tk.Tk()
-    ROOT.withdraw()
-    USER_INP = simpledialog.askstring(title="Copy & Paste in 5 Sec",prompt="Please input\t\t\t\t\t\t")
-    if  USER_INP :
-        time.sleep(5)
-        on_key_press(USER_INP)
-    else:
-        exit()
 
+if __name__ == "__main__":
+    t = time.time() 
+    while time.time() - t <= 5*60:
+        if keyboard.is_pressed("ctrl"):
+            if keyboard.is_pressed("c"):
+                USER_INP = pyperclip.paste()
+                continue
+            if keyboard.is_pressed("v"):
+                keyboard.write(USER_INP,0.003)#0.005
+                break
+    sys.exit(0)
     
     
